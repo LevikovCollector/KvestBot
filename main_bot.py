@@ -7,7 +7,7 @@ class Bot():
     def __init__(self):
 
         updater = Updater(os.getenv('TELEGRAM_TOKEN'),use_context=True)
-
+        self.quiz_stage = 1
 
         dispacher = updater.dispatcher
         dispacher.add_handler(CommandHandler("start", self.greet_user))
@@ -17,7 +17,9 @@ class Bot():
         updater.idle()
 
     def greet_user(self, update,context):
+        img_greet = open('img/greet.jpg', 'rb')
         update.message.reply_text('Hello!')
+        update.message.reply_photo(photo=img_greet)
 
     def listen_user(self, update, context):
         text_from_user = update.message.text
